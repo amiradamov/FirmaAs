@@ -182,7 +182,7 @@ List<CardItem> items = [
 Widget scrollVertical() => Column(
       children: [
         Container(
-          height: 140,
+          height: 120,
           child: ListView.separated(
             controller: _controller,
             scrollDirection: Axis.horizontal,
