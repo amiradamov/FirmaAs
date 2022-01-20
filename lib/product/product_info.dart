@@ -138,50 +138,6 @@ Widget myPhotoListBig(String MyImages, String Title, int Price) {
   // );
 }
 
-Widget myPhotoListSmall(String MyImages, String Title, String Price) {
-  return Card(
-      child: InkWell(
-    onTap: () {},
-    child: Column(
-      children: [
-        Container(
-          height: 80.0,
-          width: 80.0,
-          child: Ink.image(
-            image: AssetImage(MyImages),
-            fit: BoxFit.cover,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: Text(
-            Title,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: Colors.black, fontSize: 14.0),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: Row(
-            children: [
-              Text(Price.toString() + ' ₽',
-                  style: TextStyle(color: Colors.blueGrey, fontSize: 15.0)),
-              SizedBox(
-                width: 30.0,
-              ),
-              Icon(
-                Icons.favorite_border,
-                color: Colors.red,
-              )
-            ],
-          ),
-        )
-      ],
-    ),
-  ));
-}
-
 List<CardItem> items = [
   CardItem(
       productImage: 'products/keyboad_2.jpg',
