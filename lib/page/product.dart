@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:firmaac/main.dart';
 import 'dart:convert';
 
-
 class ProductPage extends StatefulWidget {
   final String prod_name;
   final String prod_image;
@@ -17,21 +16,42 @@ class ProductPage extends StatefulWidget {
   ProductPage(this.prod_name, this.prod_image, this.prod_price, this.prod_ost);
   @override
   State<StatefulWidget> createState() {
-      return ProductPageState(this.prod_name, this.prod_image, this.prod_price, this.prod_ost);
+    return ProductPageState(
+        this.prod_name, this.prod_image, this.prod_price, this.prod_ost);
   }
 }
-class ProductPageState extends State<ProductPage> 
-with TickerProviderStateMixin{
+
+class ProductPageState extends State<ProductPage>
+    with TickerProviderStateMixin {
   String prod_name;
   String prod_image;
   String prod_price;
   String prod_ost;
-  ProductPageState(this.prod_name, this.prod_image, this.prod_price, this.prod_ost);
+  ProductPageState(
+      this.prod_name, this.prod_image, this.prod_price, this.prod_ost);
   @override
-
-
-Widget _ost1() {
-  if (int.parse(prod_ost) > 5) {
+  Widget _ost1() {
+    if (int.parse(prod_ost) > 5) {
+      return Row(
+        children: const <Widget>[
+          Icon(
+            Icons.check,
+            color: Colors.green,
+            size: 15,
+          ),
+          SizedBox(
+            width: 4.0,
+          ),
+          Text(
+            'В наличии',
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.green,
+            ),
+          ),
+        ],
+      );
+    }
     return Row(
       children: const <Widget>[
         Icon(
@@ -39,65 +59,62 @@ Widget _ost1() {
           color: Colors.green,
           size: 15,
         ),
-        SizedBox(width: 4.0,),
-        Text('В наличии',
-        style: TextStyle(
-          fontSize: 18,
-          color: Colors.green,
-        ),),
-      ],);
-  }
-  return Row(
-      children: const <Widget>[
-        Icon(
-          Icons.check,
-          color: Colors.green,
-          size: 15,
+        SizedBox(
+          width: 4.0,
         ),
-        SizedBox(width: 4.0,),
-        Text('Осталось мало',
-        style: TextStyle(
-          fontSize: 18,
-          color: Colors.green
-        ),),
-      ],);
-}
+        Text(
+          'Осталось мало',
+          style: TextStyle(fontSize: 18, color: Colors.green),
+        ),
+      ],
+    );
+  }
 
-Widget _ost2() {
-  if (int.parse(prod_ost) > 5) {
+  Widget _ost2() {
+    if (int.parse(prod_ost) > 5) {
+      return Row(
+        children: const <Widget>[
+          Text(
+            'Осталось:',
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.black,
+            ),
+          ),
+          SizedBox(
+            width: 4.0,
+          ),
+          Text(
+            'В наличии',
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.green,
+            ),
+          ),
+        ],
+      );
+    }
     return Row(
       children: const <Widget>[
-        Text('Осталось:',
-        style: TextStyle(
-          fontSize: 18,
-          color: Colors.black,
-        ),),
-        SizedBox(width: 4.0,),
-        Text('В наличии',
-        style: TextStyle(
-          fontSize: 18,
-          color: Colors.green,
-        ),),
-      ],);
+        Text(
+          'Осталось:',
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.black,
+          ),
+        ),
+        SizedBox(
+          width: 4.0,
+        ),
+        Text(
+          'Осталось мало',
+          style: TextStyle(fontSize: 18, color: Colors.green),
+        ),
+      ],
+    );
   }
-  return Row(
-      children: const <Widget>[
-        Text('Осталось:',
-        style: TextStyle(
-          fontSize: 18,
-          color: Colors.black,
-        ),),
-        SizedBox(width: 4.0,),
-        Text('Осталось мало',
-        style: TextStyle(
-          fontSize: 18,
-          color: Colors.green
-        ),),
-      ],);
-}
 
   Widget build(BuildContext context) {
-    
     // TODO: implement build
     // throw UnimplementedError();
     return Scaffold(
@@ -106,35 +123,36 @@ Widget _ost2() {
         // automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: Colors.red),
         title: InkWell(
-            onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => MyHomePage()));
-                },
-            child: Ink.image(
-              image: AssetImage('assets/logo.png'),
-              width: 40,
-              height: 40,
-            ),
+          onTap: () {
+            Navigator.of(context).pop();
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => MyHomePage()));
+          },
+          child: Ink.image(
+            image: AssetImage('assets/logo.png'),
+            width: 40,
+            height: 40,
           ),
+        ),
         centerTitle: true,
         backgroundColor: Colors.white,
         actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-                color: Colors.black,
-              ),
-              onPressed: () {},
+          IconButton(
+            icon: Icon(
+              Icons.shopping_cart,
+              color: Colors.black,
             ),
-          ],
+            onPressed: () {},
+          ),
+        ],
       ),
       body: _buildProductDetailsPage(context),
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
+
   _buildProductDetailsPage(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
@@ -154,13 +172,6 @@ Widget _ost2() {
                 _buildDivider(screenSize),
                 SizedBox(height: 12.0),
                 _buildDetailsAndMaterialWidgets(),
-                SizedBox(height: 12.0),
-                SizedBox(height: 6.0),
-                SizedBox(height: 4.0),
-                SizedBox(height: 20.0),
-                SizedBox(height: 6.0),
-                SizedBox(height: 4.0),
-                SizedBox(height: 24.0),
               ],
             ),
           ),
@@ -169,7 +180,7 @@ Widget _ost2() {
     );
   }
 
-    _buildDivider(Size screenSize) {
+  _buildDivider(Size screenSize) {
     return Column(
       children: <Widget>[
         Container(
@@ -187,9 +198,10 @@ Widget _ost2() {
       child: Container(
         height: 250.0,
         child: Center(
-          child: Image.network(prod_image,
-          fit: BoxFit.cover,)
-        ),
+            child: Image.network(
+          prod_image,
+          fit: BoxFit.cover,
+        )),
       ),
     );
   }
@@ -205,15 +217,16 @@ Widget _ost2() {
             prod_name,
             style: TextStyle(fontSize: 18, color: Colors.black),
           ),
-          SizedBox(height: 8.0,),
+          SizedBox(
+            height: 8.0,
+          ),
           _ost1()
         ],
       ),
     );
   }
 
-
-    _buildPriceWidgets() {
+  _buildPriceWidgets() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: Column(
@@ -228,10 +241,11 @@ Widget _ost2() {
       ),
     );
   }
-  
+
   _buildDetailsAndMaterialWidgets() {
     TabController tabController = TabController(length: 2, vsync: this);
     return Container(
+      height: 240,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -261,7 +275,7 @@ Widget _ost2() {
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            height: 120.0,
+            height: 180.0,
             child: TabBarView(
               controller: tabController,
               children: <Widget>[
@@ -270,31 +284,57 @@ Widget _ost2() {
                     Column(
                       children: [
                         Container(
-                          child: Text('Бренд',
-                          style: TextStyle(fontSize: 16.0, color: Colors.grey.shade600),),)
-                      ],),
-                      SizedBox(width: 170,),
+                          child: Text(
+                            'Бренд',
+                            style: TextStyle(
+                                fontSize: 16.0, color: Colors.grey.shade600),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      width: 170,
+                    ),
                     Column(
                       children: [
                         Container(
                           child: Text('Другая',
-                          style: TextStyle(fontSize: 16.0, color: Colors.grey.shade600)),),
-                      ],),
+                              style: TextStyle(
+                                  fontSize: 16.0, color: Colors.grey.shade600)),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    SizedBox(height: 15,),
-                    Text('г. Махачкала, пр. Петра Первого, 21 (2 этаж)',
-                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),),
-                    Text('''8 (8722) 78-02-06, 55-55-15 (доб. 510, 511)
+                Container(
+                  height: 300,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Text(
+                        'г. Махачкала, пр. Петра Первого, 21 (2 этаж)',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      ),
+                      Text(
+                        '''8 (8722) 78-02-06, 55-55-15 (доб. 510, 511)
 С 9:00 до 18:00. Перерыв с 13:00 до 14:00. Выходной: Воскресенье''',
-                    style: TextStyle(color: Colors.grey.shade600, fontSize: 18),),
-                    SizedBox(height: 8.0,),
-                    _ost2()
-                  ],)
+                        style: TextStyle(
+                            color: Colors.grey.shade600, fontSize: 18),
+                      ),
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      _ost2()
+                    ],
+                  ),
+                )
                 // Text(
                 //   "86% acrylic, 9% polyster, 1% metallic yarn Hand-wash cold",
                 //   style: TextStyle(
@@ -308,6 +348,7 @@ Widget _ost2() {
       ),
     );
   }
+
   _buildBottomNavigationBar() {
     return Container(
       width: MediaQuery.of(context).size.width,

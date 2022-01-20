@@ -1,22 +1,21 @@
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/services.dart' as rootBundle;
-import 'package:responsive_grid/responsive_grid.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+// import 'package:responsive_grid/responsive_grid.dart';
+// import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firmaac/Model/prodModel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'product/product_info.dart';
 import 'product/product_cat.dart';
-import 'package:sizer/sizer.dart';
+// import 'package:sizer/sizer.dart';
 import 'dart:async' show Future;
 import 'dart:convert';
-import 'package:model/model.dart';
+// import 'package:model/model.dart';
 import 'page/categories.dart';
+import 'package:firmaac/page/product.dart';
 
-
- void main() => runApp(new MyApp());
+void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
   @override
@@ -35,10 +34,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-
-  
-
   final urlImages = [
     'assets/slider1.jpg',
     'assets/slider2.jpg',
@@ -62,7 +57,53 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
+    Widget myPhotoListSmall(
+        String MyImages, String Title, String Price, String Ost) {
+      return Card(
+          child: InkWell(
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ProductPage(Title, MyImages, Price, Ost)));
+        },
+        child: Column(
+          children: [
+            Container(
+              height: 80.0,
+              width: 80.0,
+              child: Ink.image(
+                image: NetworkImage(MyImages),
+                fit: BoxFit.cover,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                Title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: Colors.black, fontSize: 14.0),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Row(
+                children: [
+                  Text(Price.toString() + ' ₽',
+                      style: TextStyle(color: Colors.blueGrey, fontSize: 15.0)),
+                  SizedBox(
+                    width: 30.0,
+                  ),
+                  Icon(
+                    Icons.favorite_border,
+                    color: Colors.red,
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ));
+    }
 
     Widget categoryName(String cat_name) {
       return ListTile(
@@ -71,22 +112,20 @@ class _MyHomePageState extends State<MyHomePage> {
             cat_name,
           ),
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder:(context)=>AboutPage(cat_name)));
-
-          }
-          );
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => AboutPage(cat_name)));
+          });
     }
 
     Widget categoryProduct() {
       return ListView(
         shrinkWrap: true,
-        physics: ClampingScrollPhysics(), 
+        physics: ClampingScrollPhysics(),
         children: [
           for (var cat in cats) categoryName(cat),
         ],
       );
     }
-
 
     return Scaffold(
         backgroundColor: Color(0xFFF2F2F2),
@@ -94,12 +133,12 @@ class _MyHomePageState extends State<MyHomePage> {
           iconTheme: IconThemeData(color: Colors.red),
           title: InkWell(
             onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => MyHomePage()));
-                },
+              Navigator.of(context).pop();
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => MyHomePage()));
+            },
             child: Ink.image(
               image: AssetImage('assets/logo.png'),
               width: 40,
@@ -118,8 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
-        body: 
-        Container(
+        body: Container(
           child: Container(
             child: StaggeredGridView.count(
               crossAxisCount: 3,
@@ -152,12 +190,21 @@ class _MyHomePageState extends State<MyHomePage> {
                 captionText("Новинки"),
                 myPhotoListBig("products/phone_3.jpg",
                     'Lorem ipsum dolor 12PRO MAX NEW 128 GB', 50000),
-                myPhotoListSmall("products/headphones_1.jpg",
-                    'Наушники Lorem Ipsum Go', '8000'),
-                myPhotoListSmall("products/keyboad_2.jpg",
-                    'Kлавиатура Lorem Lor 12 RR Go', '15000'),
-                myPhotoListSmall("products/laptop_1.png",
-                    'Lorem ipsum dolor 12PRO MAX NEW 128 GB', '15000'),
+                myPhotoListSmall(
+                    "http://www.firmaac.ru//upload/img/s42607i0_b.jpg",
+                    'Стол компьютерный НСС 9, яблоня-локарно (800*600*1430)',
+                    '6210',
+                    '1'),
+                myPhotoListSmall(
+                    "http://www.firmaac.ru//upload/img/s90685i0_b.jpg",
+                    'Пылесос LG VK76W02HY (380/2000Вт, циклон, серый/серебристый)',
+                    '9620',
+                    '1'),
+                myPhotoListSmall(
+                    "http://www.firmaac.ru//upload/img/87548i0_b.jpg",
+                    'Фен Philips BHD006/00 (1600Вт, белый)',
+                    '1570',
+                    '1'),
                 myPhotoListSmall("products/keyboard_1.jpg",
                     'Lorem ipsum dolor 12PRO MAX NEW 128 GB', '15000'),
                 myPhotoListSmall("products/mause_2.jpg",
@@ -183,9 +230,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         drawer: Drawer(
-          child: 
-          
-          ListView(children: <Widget>[
+          child: ListView(children: <Widget>[
             ListTile(
                 leading: const Icon(Icons.person),
                 title: new Text('Акаунт'),
@@ -249,9 +294,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ));
   }
 
-
-  Future<List<ProdModel>>ReadJsonData() async{
-    final jsondata = await rootBundle.rootBundle.loadString('assets/data/all_prod1.json');
+  Future<List<ProdModel>> ReadJsonData() async {
+    final jsondata =
+        await rootBundle.rootBundle.loadString('assets/data/all_prod1.json');
     final list = json.decode(jsondata) as List<dynamic>;
 
     return list.map((e) => ProdModel.fromJson(e)).toList();
