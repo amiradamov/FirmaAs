@@ -10,19 +10,24 @@ Widget captionText(String titleText) {
   return Padding(
     padding: const EdgeInsets.all(5.0),
     child: Container(
-      child: Column(
-        children: <Widget>[
-          SizedBox(
-            height: 18,
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Container(
-              child: Text(
-                titleText,
-                style: TextStyle(color: Colors.black, fontSize: 24.0),
+      child: Row(
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              SizedBox(
+                height: 18,
               ),
-            ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  child: Text(
+                    titleText,
+                    style: TextStyle(color: Colors.black, fontSize: 24.0),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
