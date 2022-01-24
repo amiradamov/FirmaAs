@@ -14,6 +14,7 @@ import 'dart:convert';
 // import 'package:model/model.dart';
 import 'page/categories.dart';
 import 'package:firmaac/page/product.dart';
+import 'package:firmaac/Model/ProductModel.dart';
 
 void main() => runApp(new MyApp());
 
@@ -34,6 +35,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<ProductModel> cart = [];
+
   final urlImages = [
     'assets/slider1.jpg',
     'assets/slider2.jpg',
