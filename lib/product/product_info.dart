@@ -15,7 +15,7 @@ Widget captionText(String titleText) {
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 18,
               ),
               Align(
@@ -23,7 +23,7 @@ Widget captionText(String titleText) {
                 child: Container(
                   child: Text(
                     titleText,
-                    style: TextStyle(color: Colors.black, fontSize: 24.0),
+                    style: const TextStyle(color: Colors.black, fontSize: 24.0),
                   ),
                 ),
               ),
@@ -36,23 +36,23 @@ Widget captionText(String titleText) {
 }
 
 List<CardItem> items = [
-  CardItem(
+  const CardItem(
       productImage: 'products/keyboad_2.jpg',
       title: 'Lorem ipsum dolor 12PRO MAX NEW 128 GB',
       subtitle: '5000'),
-  CardItem(
+  const CardItem(
       productImage: 'products/phone_3.jpg',
       title: 'Lorem ipsum dolor 12PRO MAX NEW 128 GB',
       subtitle: '40000'),
-  CardItem(
+  const CardItem(
       productImage: 'products/headphones_1.jpg',
       title: 'Наушники Lorem Ipsum Go',
       subtitle: '25000'),
-  CardItem(
+  const CardItem(
       productImage: 'products/keyboard_1.jpg',
       title: 'LKлавиатура Lorem Lor 12 RR Go',
       subtitle: '3000'),
-  CardItem(
+  const CardItem(
       productImage: 'products/mause_2.jpg',
       title: 'Lorem ipsum dolor 12PRO MAX NEW 128 GB',
       subtitle: '15000'),
@@ -66,13 +66,13 @@ Widget scrollVertical() => Column(
             controller: _controller,
             scrollDirection: Axis.horizontal,
             itemCount: items.length,
-            separatorBuilder: (context, _) => SizedBox(
+            separatorBuilder: (context, _) => const SizedBox(
               width: 0,
             ),
             itemBuilder: (context, index) => buildCard(item: items[index]),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         buildIndicator(),
